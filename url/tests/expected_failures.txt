@@ -43,11 +43,6 @@
 <non-spec:/> set pathname to <//p>
 <non-spec:/.//> set pathname to <p>
 <file:///w|/m>
-<non-special:opaque  ?hi>
-<non-special:opaque  #hi>
-<non-special:opaque \t\t  \t#hi>
-<non-special:opaque \t\t  #hi>
-<non-special:opaque\t\t  \r #hi>
 <///test> against <http://example.org/>
 <///\\//\\//test> against <http://example.org/>
 <///example.org/path> against <http://example.org/>
@@ -56,12 +51,4 @@
 <///example.org/../path/../../> against <http://example.org/>
 <///example.org/../path/../../path> against <http://example.org/>
 </\\//\\/a/../> against <file:///>
-<data:space                                                                                                                                  #fragment> set hash to <>
-<sc:space    #fragment> set hash to <>
-<data:space  ?query#fragment> set hash to <>
-<sc:space  ?query#fragment> set hash to <>
-<data:space ?query> set search to <>
-<sc:space ?query> set search to <>
-<data:space  ?query#fragment> set search to <>
-<sc:space  ?query#fragment> set search to <>
 <https://domain.com:3000> set port to <\n\n\t\t>

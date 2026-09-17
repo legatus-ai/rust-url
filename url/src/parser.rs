@@ -1409,6 +1409,16 @@ impl Parser<'_> {
             let input_before_c = input.clone();
             match input.next_utf8() {
                 Some(('?', _)) | Some(('#', _)) if self.context == Context::UrlParser => {
+                    // A raw trailing space in an opaque path would not
+                    // survive re-parsing once a query or fragment follows
+                    // it, so percent-encode it to preserve the path.
+                    // Matches Chrome and the WPT urlsearchparams-delete
+                    // expectations (e.g. `data:space    ?test` keeps
+                    // `space   %20` as its path).
+                    if self.serialization.ends_with(' ') {
+                        self.serialization.truncate(self.serialization.len() - 1);
+                        self.serialization.push_str("%20");
+                    }
                     return input_before_c
                 }
                 Some((c, utf8_c)) => {
