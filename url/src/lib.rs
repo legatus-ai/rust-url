@@ -3198,3 +3198,15 @@ impl Drop for UrlQuery<'_> {
         }
     }
 }
+
+/// Marker for the Legatus fork: this `url` crate percent-encodes a
+/// trailing space in an opaque path (servo/rust-url#1123 behavior),
+/// unlike upstream `url` 2.5.x. Consumed ONLY as a build-time fork
+/// check by servo-engine's `tools/legatus-check` (and any downstream
+/// workspace that copies the check): referencing this symbol fails to
+/// compile against upstream `url`, so a missing `[patch.crates-io]`
+/// entry fails the build instead of silently testing the wrong parser.
+/// Remove if upstream adopts the behavior and the fork is retired.
+pub fn legatus_opaque_path_trailing_space_encoded() -> bool {
+    true
+}
